@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#bg)" />
+  <!-- Soundwave circles -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="white" stroke-width="3" opacity="0.15" />
+  <circle cx="256" cy="256" r="210" fill="none" stroke="white" stroke-width="2" opacity="0.1" />
+  <!-- Speech bubble with microphone & Arabic text -->
+  <path d="M 120 180 C 120 130 160 100 256 100 C 352 100 392 130 392 180 C 392 230 352 260 290 260 L 260 300 L 230 260 C 160 260 120 230 120 180 Z" fill="#ffffff" opacity="0.95" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.2))" />
+  <!-- Arabic Calligraphy Text: كلام -->
+  <text x="256" y="205" font-family="'Amiri', 'Noto Sans Arabic', serif" font-size="78" font-weight="bold" fill="#047857" text-anchor="middle" direction="rtl">كَلَام</text>
+  <!-- Mic icon badge below -->
+  <circle cx="256" cy="370" r="50" fill="url(#gold)" />
+  <path d="M 256 345 C 248 345 242 351 242 358 L 242 372 C 242 379 248 385 256 385 C 264 385 270 379 270 372 L 270 358 C 270 351 264 345 256 345 Z" fill="#064e3b" />
+  <path d="M 235 368 C 235 379 244 388 256 388 C 268 388 277 379 277 368" fill="none" stroke="#064e3b" stroke-width="4" stroke-linecap="round" />
+  <line x1="256" y1="388" x2="256" y2="397" stroke="#064e3b" stroke-width="4" stroke-linecap="round" />
+</svg>

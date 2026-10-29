@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default Deny: Menolak akses ke dokumen yang tidak diatur secara eksplisit
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Fungsi pembantu untuk memverifikasi autentikasi pengguna
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Fungsi pembantu untuk memverifikasi kepemilikan data berdasarkan UID
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // ATURAN KEAMANAN UTAMA:
+    // Setiap pengguna HANYA dapat membaca dan menulis dokumen profil miliknya sendiri
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Seluruh subkoleksi (sessions, vocabulary, progress, dll.) HANYA dapat dibaca/ditulis oleh pemilik akun
+      match /{subcollection}/{docId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+  }
+}

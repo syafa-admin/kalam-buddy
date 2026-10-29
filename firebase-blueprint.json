@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile data and Arabic learning preferences",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 200 },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "selectedLevel": { "type": "string", "enum": ["beginner", "elementary", "intermediate"] },
+        "dailyGoalMinutes": { "type": "number" },
+        "correctionLevel": { "type": "string", "enum": ["gentle", "moderate", "strict"] },
+        "showTranslation": { "type": "boolean" },
+        "showTashkeel": { "type": "boolean" },
+        "autoTts": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["displayName", "selectedLevel"]
+    },
+    "PracticeSession": {
+      "title": "PracticeSession",
+      "description": "User practice session history, duration and AI evaluation",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "mode": { "type": "string", "enum": ["free_talk", "scenario", "curriculum"] },
+        "title": { "type": "string", "maxLength": 200 },
+        "scenarioId": { "type": "string", "maxLength": 100 },
+        "unitId": { "type": "string", "maxLength": 100 },
+        "durationSeconds": { "type": "number" },
+        "turnsCount": { "type": "number" },
+        "summary": { "type": "string", "maxLength": 2000 },
+        "fluencyScore": { "type": "number" },
+        "feedback": { "type": "string", "maxLength": 3000 },
+        "completedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "mode", "durationSeconds"]
+    },
+    "VocabularyWord": {
+      "title": "VocabularyWord",
+      "description": "Arabic vocabulary collected by user with harakat and translation",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "arabic": { "type": "string", "maxLength": 200 },
+        "transliteration": { "type": "string", "maxLength": 200 },
+        "translation": { "type": "string", "maxLength": 300 },
+        "exampleSentence": { "type": "string", "maxLength": 500 },
+        "category": { "type": "string", "maxLength": 100 },
+        "masteryLevel": { "type": "number" },
+        "isFavorite": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "arabic", "translation"]
+    },
+    "CurriculumProgress": {
+      "title": "CurriculumProgress",
+      "description": "Tracking user progress across curriculum levels and units",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "unitId": { "type": "string", "maxLength": 100 },
+        "levelId": { "type": "string", "maxLength": 100 },
+        "completed": { "type": "boolean" },
+        "score": { "type": "number" },
+        "completedAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "unitId", "completed"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores user profiles and Arabic learning preferences"
+    },
+    "/users/{userId}/sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/PracticeSession" },
+      "description": "Stores speaking practice sessions and pedagogical AI feedback"
+    },
+    "/users/{userId}/vocabulary/{wordId}": {
+      "schema": { "$ref": "#/entities/VocabularyWord" },
+      "description": "Stores user vocabulary flashcards and favorites"
+    },
+    "/users/{userId}/progress/{unitId}": {
+      "schema": { "$ref": "#/entities/CurriculumProgress" },
+      "description": "Stores completion state of curriculum lessons"
+    }
+  }
+}

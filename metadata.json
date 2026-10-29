@@ -1,0 +1,6 @@
+{
+  "name": "Kalām Buddy",
+  "description": "AI Arabic Speaking Partner interaktif real-time untuk mahasiswa Pendidikan Bahasa Arab dan pembelajar pemula. Speak Arabic, Build Confidence.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
